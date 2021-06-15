@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseReposirory reposirory;
-    
+
     @Override
     public Course save(Course course) {
         return null;
@@ -31,6 +31,11 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Page<Course> findByTag(String tag) {
+        return null;
+    }
+
+    @Override
+    public Page<Course> findAll() {
         return null;
     }
 

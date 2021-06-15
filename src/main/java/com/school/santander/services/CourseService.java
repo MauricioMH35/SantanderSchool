@@ -9,6 +9,7 @@ public interface CourseService {
     Course findById(String id);
     Page<Course> findByNameContains(String name);
     Page<Course> findByTag(String tag);
+    Page<Course> findAll();
     Page<Customer> listRegistryTeachersCourse(String courseId);
     Page<Customer> listRegistryStudentsCourse(String courseId);
     Customer registryTeacherInCourse(String courseId, Customer teacher);
