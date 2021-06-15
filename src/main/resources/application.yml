@@ -1,0 +1,7 @@
+service:
+  port: 8081
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/santanderSchool
