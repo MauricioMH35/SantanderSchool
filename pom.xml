@@ -15,8 +15,30 @@
 	<description>School Santander</description>
 	<properties>
 		<java.version>11</java.version>
+		<springdoc-openapi-ui.version>1.5.9</springdoc-openapi-ui.version>
 	</properties>
 	<dependencies>
+		<!-- (Spring Doc) Dependence -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc-openapi-ui.version}</version>
+		</dependency>
+
+		<!-- (Spring Doc) Spring Data Rest support  -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-data-rest</artifactId>
+			<version>${springdoc-openapi-ui.version}</version>
+		</dependency>
+
+		<!-- (Spring Doc) Spring security support -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-security</artifactId>
+			<version>${springdoc-openapi-ui.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
