@@ -10,10 +10,6 @@ public interface CourseService {
     Page<Course> findByNameContains(String name);
     Page<Course> findByTag(String tag);
     Page<Course> findAll();
-    Page<Customer> listRegistryTeachersCourse(String courseId);
-    Page<Customer> listRegistryStudentsCourse(String courseId);
-    Customer registryTeacherInCourse(String courseId, Customer teacher);
-    Customer registryStudentInCourse(String courseId, Customer student);
     void updateById(String courseId, Course courseReplace);
     void deleteById(String courseId);
 }
