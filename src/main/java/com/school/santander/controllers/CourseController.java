@@ -3,7 +3,7 @@ package com.school.santander.controllers;
 import com.school.santander.models.Course;
 import com.school.santander.models.Customer;
 import com.school.santander.services.CourseService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,16 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
+@AllArgsConstructor
 public class CourseController {
 
     private final CourseService service;
+
+    @GetMapping("/admin/courses/get/model")
+    public Course getModel() {
+        return new Course();
+    }
 
     @PostMapping("/admin/courses/create")
     public ResponseEntity<Course> save(@RequestBody @Valid Course course) {
@@ -56,14 +62,14 @@ public class CourseController {
     @GetMapping("/admin/courses/list/teachers/{courseId}")
     public ResponseEntity<Page<Customer>> listRegistryTeachersCourse(@PathVariable String courseId) {
         return new ResponseEntity<>(
-                service.listRegistryTeachersCourse(courseId), HttpStatus.FOUND
+                null, HttpStatus.FOUND
         );
     }
 
     @GetMapping("/admin/courses/list/students/{courseId}")
     public ResponseEntity<Page<Customer>> listRegistryStudentsCourse(@PathVariable String courseId) {
         return new ResponseEntity<>(
-                service.listRegistryStudentsCourse(courseId), HttpStatus.FOUND
+                null, HttpStatus.FOUND
         );
     }
 
@@ -71,7 +77,7 @@ public class CourseController {
     public ResponseEntity<Customer> registryTeacherInCourse(
             @PathVariable String courseId, @RequestBody @Valid Customer teacher) {
         return new ResponseEntity<>(
-                service.registryTeacherInCourse(courseId, teacher), HttpStatus.FOUND
+                null, HttpStatus.FOUND
         );
     }
 
@@ -79,13 +85,13 @@ public class CourseController {
     public ResponseEntity<Customer> registryStudentInCourse(
             @PathVariable String courseId, @RequestBody @Valid Customer student) {
         return new ResponseEntity<>(
-                service.registryStudentInCourse(courseId, student), HttpStatus.FOUND
+                null, HttpStatus.FOUND
         );
     }
 
     @PutMapping("/admin/courses/update/{courseId}")
     public ResponseEntity updateById(
-            @PathVariable String courseId, @RequestBody @Valid Course courseReplace) {
+            @PathVariable String courseId, @RequestBody Course courseReplace) {
         service.updateById(courseId, courseReplace);
         return new ResponseEntity<>(HttpStatus.OK);
     }
