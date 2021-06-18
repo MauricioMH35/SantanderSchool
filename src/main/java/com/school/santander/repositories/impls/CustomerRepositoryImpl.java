@@ -1,28 +1,18 @@
 package com.school.santander.repositories.impls;
 
-import com.fasterxml.jackson.annotation.JacksonInject;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.mongodb.client.result.UpdateResult;
-import com.school.santander.exceptions.BadRequestException;
 import com.school.santander.exceptions.NotFoundException;
 import com.school.santander.models.Customer;
 import com.school.santander.repositories.CustomerRepositoryCustom;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;

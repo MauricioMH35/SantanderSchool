@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/santander/courses")
+@RequestMapping("/pb/santander/courses")
 @AllArgsConstructor
 public class CourseController {
 
@@ -81,8 +81,8 @@ public class CourseController {
             @ApiResponse(responseCode = "302", description = "When you are successful in finding"),
             @ApiResponse(responseCode = "404", description = "When not successful to find")
     })
-    @GetMapping(value = "/find/all", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<Course>>  findAll() {
+    @GetMapping(value = "/all", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<Course>> findAll() {
         return new ResponseEntity<>(
                 service.findAll(), HttpStatus.FOUND
         );

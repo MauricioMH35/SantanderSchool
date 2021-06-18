@@ -1,7 +1,6 @@
 package com.school.santander.services;
 
 import com.school.santander.models.Course;
-import com.school.santander.models.Customer;
 import org.springframework.data.domain.Page;
 
 public interface CourseService {
