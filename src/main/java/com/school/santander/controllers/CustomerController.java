@@ -15,67 +15,32 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
-@RequestMapping("/cs")
+@RequestMapping("/pb/santander")
 @RequiredArgsConstructor
 public class CustomerController {
 
     private final CustomerService service;
 
-
-    @PostMapping("/register")
+    @Operation(
+            summary = "Register a new customer in the application",
+            description = "Registers the customer in the application and returns the registered customer as a" +
+                    " response, so you can view the registered data. A customer can be either a teacher who registers " +
+                    "for a course after registering in the application, or it can also be a student to consume the " +
+                    "course content.",
+            tags = {"Customer / User School Santander "}
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "When Successful Operation Create Customer"),
+            @ApiResponse(responseCode = "409", description = "When where is conflict Customer already exists")
+    })
+    @PostMapping(value = "/register", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> save(@RequestBody @Valid Customer customer) {
         return new ResponseEntity<>(
                 service.save(customer), HttpStatus.CREATED
         );
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<Customer> findByIdAuth(
-            @PathVariable String id, @AuthenticationPrincipal UserDetails userDetails) {
-        return new ResponseEntity<>(
-                service.findById(id), HttpStatus.FOUND
-        );
-    }
-
-    @GetMapping("/user/find/name")
-    public ResponseEntity<Page<Customer>> findByNameContains(@RequestParam("search") String name) {
-        return new ResponseEntity<>(
-                service.findByNameContains(name), HttpStatus.FOUND
-        );
-    }
-
-    @GetMapping("/user/find/username")
-    public ResponseEntity<Customer> findByUsername(@RequestParam("search") String username) {
-        return new ResponseEntity<>(
-                service.findByUsername(username), HttpStatus.FOUND
-        );
-    }
-
-    @GetMapping("/user/find/tag")
-    public ResponseEntity<Page<Customer>> findByTag(@RequestParam("search") String tag) {
-        return new ResponseEntity<>(
-                service.findByTag(tag), HttpStatus.FOUND
-        );
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<Page<Customer>> findAll() {
-        return new ResponseEntity<>(
-                service.findAll(), HttpStatus.FOUND
-        );
-    }
-
-    @PutMapping("/user/update/{customerId}")
-    public ResponseEntity updateById(
-            @PathVariable String customerId, @RequestBody @Valid Customer customerReplace) {
-        service.updateById(customerId, customerReplace);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping("/user/delete/{customerId}")
-    public ResponseEntity deleteById(@PathVariable String customerId) {
-        service.deleteById(customerId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

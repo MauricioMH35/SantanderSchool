@@ -9,6 +9,10 @@ import com.school.santander.services.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,18 +29,22 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository repository;
 
     @Override
+    public UserDetails loadUserByUsername(String username) {
+        return Optional.ofNullable(repository.findByUsername(username))
+                .orElseThrow(() -> new UsernameNotFoundException("Cannot find user with last username"));
+    }
+
+    @Override
     public Customer save(Customer customer) {
         if(repository.checkUniqueValues(customer) == null) {
             PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
             String password = passwordEncoder.encode(customer.getPassword());
-            String roles = "user";
             String tag = customer.getTag().toLowerCase(Locale.ROOT)
                     .replaceAll("\\s", "_");
 
             LocalDate assign = LocalDate.now();
 
             customer.setPassword(password);
-            customer.setRoles(roles);
             customer.setTag(tag);
             customer.setAssign(assign);
 

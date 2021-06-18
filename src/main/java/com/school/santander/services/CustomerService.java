@@ -1,10 +1,10 @@
 package com.school.santander.services;
 
-import com.school.santander.models.Course;
 import com.school.santander.models.Customer;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface CustomerService {
+public interface CustomerService extends UserDetailsService {
     Customer save(Customer customer);
     Customer findById(String id);
     Page<Customer> findByNameContains(String name);

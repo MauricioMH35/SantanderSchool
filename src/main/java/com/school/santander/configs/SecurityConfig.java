@@ -19,13 +19,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .cors().and()
+                .csrf().disable()
                 // Habilitar CSRF para a que o token seja requisitado
 //                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //                .and()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("admin")
-                .antMatchers("/user/**").hasRole("user")
+                .antMatchers("/admin/santander/**").hasRole("admin")
+                .antMatchers("/user/santander/**").hasRole("user")
+                .antMatchers("/pb/santander/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -37,9 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        String passwordTest = passwordEncoder.encode("dev");
-        System.out.println(passwordTest);
-
         auth.userDetailsService(customerService)
                 .passwordEncoder(passwordEncoder);
     }
